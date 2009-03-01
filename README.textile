@@ -1,0 +1,17 @@
+h2. Fastz - fast ruby timezone library
+
+This library provide daylight savings aware transformations between times in different time zones. At the momement it provides only base capability, but it significantly faster then other ruby library "TZInfo":http://tzinfo.rubyforge.org/, (about 4 times in simple benchmark)
+<pre>
+<code>
+      user     system      total        real
+Fastz   1.880000   0.140000   2.020000 (  2.280718)
+TZInfo  7.670000   0.440000   8.110000 (  9.202464)
+</code>
+</pre>
+
+Look at test/bench.rb for examples of usage
+
+h3. Credits and dependencies
+
+* "Boost.Date_Time":http://www.boost.org/doc/libs/1_38_0/doc/html/date_time.html (bundled with library)
+* "Rice":http://rice.rubyforge.org/
