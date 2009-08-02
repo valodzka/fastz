@@ -1,0 +1,2 @@
+
+rquire 'fastz_ext'
