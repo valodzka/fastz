@@ -17,6 +17,8 @@ static char	xtimehid[] = "@(#)xtime.h	1.0";
 #endif /* !defined NOID */
 #endif /* !defined lint */
 
+#include <time.h>
+
 /*
 ** The structure that holds information for a time zone is opaque to
 ** all the APIs we provide; a zoneinfo_t is a pointer to that structure.
