@@ -62,6 +62,10 @@ MANDIR=		$(TOPDIR)/man
 LIBDIR=		$(TOPDIR)/lib
 TZLIB=		$(LIBDIR)/libtz.a
 
+# Header files go in. . .
+
+INCDIR=		$(TOPDIR)/include
+
 # If you always want time values interpreted as "seconds since the epoch
 # (not counting leap seconds)", use
 #	REDO=		posix_only
@@ -345,11 +349,13 @@ right_posix:	right_only other_two
 
 zones:		$(REDO)
 
-$(TZLIB):	$(LIBOBJS)
+$(TZLIB):	$(LIBOBJS) xtime.h
 		-mkdir $(TOPDIR) $(LIBDIR)
 		ar ru $@ $(LIBOBJS)
 		if [ -x /usr/ucb/ranlib -o -x /usr/bin/ranlib ] ; \
 			then ranlib $@ ; fi
+		-rm -f $(INCDIR)/xtime.h
+		cp xtime.h $(INCDIR)
 
 date:		$(DATEOBJS)
 		$(CC) $(CFLAGS) date.o localtime.o asctime.o strftime.o \

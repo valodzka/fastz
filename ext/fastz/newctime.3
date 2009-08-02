@@ -30,6 +30,23 @@ asctime, ctime, difftime, gmtime, localtime, mktime \- convert date and time to 
 .B time_t mktime(tm)
 .B struct tm *tm;
 .PP
+.B #include <xtime.h>
+.PP
+.B zoneinfo_t loadzone(zonename)
+.B const char *zonename;
+.PP
+.B void freezone(zoneinfo)
+.B zoneinfo_t zoneinfo;
+.PP
+.B struct tm *localtime_zr(clock, tm, zoneinfo)
+.B const time_t *clock;
+.B struct tm *tm;
+.B const zoneinfo_t zoneinfo;
+.PP
+.B time_t mktime_z(tm, zoneinfo)
+.B struct tm *tm;
+.B const zoneinfo_t zoneinfo;
+.PP
 .B cc ... -ltz
 .fi
 .SH DESCRIPTION
@@ -136,6 +153,38 @@ returns the specified calendar time;
 If the calendar time cannot be represented,
 it returns
 .BR -1 .
+.PP
+.I Loadzone\^
+allocates a structure to hold time zone information and fills it in with
+information for the time zone specified by
+.IR zonename .
+It returns a pointer to that structure.
+.PP
+.I Freezone\^
+frees the time zone information structure pointed to by
+.IR zoneinfo .
+.PP
+.I Localtime_zr\^
+fills in the ``tm'' structure pointed to by
+.I tm
+for the time specified by
+.I clock
+in the time zone specified by
+.IR zoneinfo .
+It returns a pointer to
+.I tm
+on success and NULL on failure.
+.PP
+.I Mktime_z\^
+converts the broken-down time, expresed as local time in the zone
+specified by
+.I zoneinfo ,
+in the structure pointed to by
+.I tm
+into a calendar time value with the same encoding as that of the values
+returned by the
+.I time
+function.
 .PP
 .I Difftime\^
 returns the difference between two calendar times,
